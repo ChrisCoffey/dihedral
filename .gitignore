@@ -1,2 +1,8 @@
-/target
+/target/*
 /project
+/.idea
+/bin
+/.cache
+.scala_dependencies
+/.target
+/target
