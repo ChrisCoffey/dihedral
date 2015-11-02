@@ -1,8 +1,9 @@
-/target/*
 /project
+/target
 /.idea
 /bin
 /.cache
-.scala_dependencies
-/.target
-/target
+target
+tags
+.*.swp
+.*.swo
