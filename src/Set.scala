@@ -38,6 +38,11 @@ trait Set[S[_]]{
 
 //all of these operations can become far more efficient if there's a means of iterating over a set
 object Set {
+    implicit class In[A](a: A){
+        def ∈[M[_]](m: M[A])(implicit s: Set[M], o: Ordering[A]): Boolean =
+            s.in(a, m)
+    }
+
     def union[A, M[_]](m: M[A], n: M[A])(implicit s: Set[M], o: Ordering[A]): M[A] = {
        s.element(m) match {
            case None => n
