@@ -85,19 +85,21 @@ object BinaryTree {
 
 
 
-//sealed trait Color
-//case object Red extends Color
-//case object Black extends Color
-//
-//sealed trait RedBlackTree[A]
-//case object Empty extends RedBlackTree[Nothing]
-//case class RedBlackTreeNode[A](c: Color, l: RedBlackTree[A], value: A, r: RedBlackTree[A]) extends RedBlackTree[A]
-//object RedBlackTree {
-//  def balance[A](t: RedBlackTree[A]): RedBlackTree[A] =
-//    t match {
-//
-//    }
-//
-//}
+sealed trait Color
+case object Red extends Color
+case object Black extends Color
+
+sealed trait RedBlackTree[A]
+case object Empty extends RedBlackTree[Nothing]
+case class RBNode[A](c: Color, l: RedBlackTree[A], value: A, r: RedBlackTree[A]) extends RedBlackTree[A]
+object RedBlackTree {
+    type RBT[A] = RedBlackTree[A]
+  def balance[A](t: RBT[A]): RBT[A] =
+    t match {
+        case RBNode(Black, RBNode(Red, RBNode(Red, dd,  a, aa), b, bb), c, cc) =>
+            RBNode(Red, RBNode(Black, dd, a, aa), b, RBNode(Black, bb, c, cc))
+    }
+
+}
 
 

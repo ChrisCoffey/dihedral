@@ -9,12 +9,7 @@ import org.ccoffey.dihedral.Set._
 //note this is a clumsy signature, but it's very flexible and enforces the semigroup laws
 // wrt a set. that being said, it's going to fall down with infinite sets
 trait SemiGroup[A]{
-    def +[M[_]](g: M[A])(a: A, b: A)(implicit s: Set[M], o: Ordering[A]): Option[A] =
-        if (( a ∈ g ) && ( b ∈ g ))
-            Some(combine(a, b))
-        else None
-
-    protected def combine(a: A, b: A): A
+    def combine(a: A, b: A): A
 }
 
 object SemiGroup {
@@ -43,7 +38,8 @@ trait Monoid[A] extends SemiGroup[A] {
 trait Group[A] extends Monoid[A] {
     def inverse(a: A): A
 
-    def remove
+    def remove(a: A, b: A): A =
+        combine(a, inverse(b))
 
     private def infinite[M[_] <: Traversable[_]](g: M[A]): Boolean =
         g match {
